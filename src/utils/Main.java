@@ -74,10 +74,10 @@ public class Main {
             String string_dec = new String(e6decrypt, StandardCharsets.UTF_8);
             System.out.println(string_dec);
 
+        } catch (IOException e) {
+            e.printStackTrace();
         } /* catch (BadPaddingException paddingException) {
             System.out.println(paddingException);
-        } */ catch (IOException e) {
-            e.printStackTrace();
-        }
+        } */
     }
 }
