@@ -1,5 +1,6 @@
 package utils;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -25,7 +26,7 @@ public class Main {
             System.out.println(string2);
 
             // Desencripto l'informació de l'array encriptat y ho imprimo
-            byte[] array_desencriptat = Xifrar.decryptData(array_encriptat,KeyE5);
+            byte[] array_desencriptat = Xifrar.decryptData(array_encriptat, KeyE5);
             System.out.println("********** E5 - Desencriptat **********");
             String string = new String(array_desencriptat, StandardCharsets.UTF_8);
             System.out.println(string);
@@ -34,6 +35,49 @@ public class Main {
             System.out.println(e.getMessage());
         }
 
+        // Exercici 6
+        try {
+            Path path = Paths.get("textE6");
+            byte[] textenbytes = Files.readAllBytes(path);
 
+            SecretKey keyE6 = Xifrar.passwordKeyGeneration("pas",256);
+
+            byte[] e6encrypt = Xifrar.encryptData(keyE6, textenbytes);
+            System.out.println("*********** E6 - Encriptat ***********");
+            String string_enc = new String(e6encrypt, StandardCharsets.UTF_8);
+            System.out.println(string_enc);
+
+            byte[] e6decrypt = Xifrar.decryptData(e6encrypt, keyE6);
+            System.out.println("********** E6 - Desencriptat **********");
+            String string_dec = new String(e6decrypt, StandardCharsets.UTF_8);
+            System.out.println(string_dec);
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Exercici 8
+        try {
+            Path path = Paths.get("textE8");
+            byte[] textenbytes = Files.readAllBytes(path);
+
+            SecretKey keyE6 = Xifrar.passwordKeyGeneration("pas",256);
+            SecretKey key_diferente = Xifrar.passwordKeyGeneration("IESPuigCastellar", 256);
+
+            byte[] e6encrypt = Xifrar.encryptData(keyE6, textenbytes);
+            System.out.println("*********** E8 - Encriptat ***********");
+            String string_enc = new String(e6encrypt, StandardCharsets.UTF_8);
+            System.out.println(string_enc);
+
+            byte[] e6decrypt = Xifrar.decryptData(e6encrypt, key_diferente);
+            System.out.println("********** E8 - Desencriptat **********");
+            String string_dec = new String(e6decrypt, StandardCharsets.UTF_8);
+            System.out.println(string_dec);
+
+        } /* catch (BadPaddingException paddingException) {
+            System.out.println(paddingException);
+        } */ catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
