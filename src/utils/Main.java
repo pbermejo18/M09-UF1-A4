@@ -1,6 +1,5 @@
 package utils;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -30,7 +29,6 @@ public class Main {
             System.out.println("********** E5 - Desencriptat **********");
             String string = new String(array_desencriptat, StandardCharsets.UTF_8);
             System.out.println(string);
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -51,14 +49,13 @@ public class Main {
             System.out.println("********** E6 - Desencriptat **********");
             String string_dec = new String(e6decrypt, StandardCharsets.UTF_8);
             System.out.println(string_dec);
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
         // Exercici 8
         try {
-            Path path = Paths.get("textE8");
+            Path path = Paths.get("textE6");
             byte[] textenbytes = Files.readAllBytes(path);
 
             SecretKey keyE6 = Xifrar.passwordKeyGeneration("pas",256);
@@ -73,11 +70,8 @@ public class Main {
             System.out.println("********** E8 - Desencriptat **********");
             String string_dec = new String(e6decrypt, StandardCharsets.UTF_8);
             System.out.println(string_dec);
-
         } catch (IOException e) {
             e.printStackTrace();
-        } /* catch (BadPaddingException paddingException) {
-            System.out.println(paddingException);
-        } */
+        }
     }
 }
